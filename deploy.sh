@@ -1,6 +1,6 @@
 npm run build
 
-cd dist
+cd build
 
 git init
 git add -A
@@ -8,4 +8,4 @@ git commit -m 'deploy'
 
 git checkout -b gh-pages
 
-git push -f gh-pages:gh-pages
+git push -f https://github.com/vinodselvin/Calculators.git gh-pages:gh-pages
