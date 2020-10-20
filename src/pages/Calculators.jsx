@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Box, Link, Typography } from '@material-ui/core';
 import { EnhancedTable } from '../components';
+import { Icon, InlineIcon } from '@iconify/react';
+import calculatorIcon from '@iconify/icons-mdi/calculator';
+import logo from '../logo.svg';
 
 export default class Calculators extends Component {
     state = {
@@ -44,6 +47,7 @@ export default class Calculators extends Component {
     render() {
         return (
             <div>
+                <img src={logo} width="84" height="84" />
                 <Box id="header-section" mb={2}>
                     <Typography variant="h4">Calculator Hub</Typography>
                     <Typography variant="body1">List the calculators name with the links below</Typography>
