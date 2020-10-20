@@ -51,9 +51,9 @@ export default function EnhancedTable(props) {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {props?.rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)?.map((row) => {
+                        {props?.rows?.length > 0 ? props?.rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)?.map((row) => {
                             return (
-                                <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                                <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
                                     {props?.columns?.map((column) => {
                                         const value = row[column.id];
                                         return (
@@ -64,7 +64,9 @@ export default function EnhancedTable(props) {
                                     })}
                                 </TableRow>
                             );
-                        })}
+                        }) : <TableRow>
+                                <TableCell colSpan={props?.columns?.length} key="no-results-table" align="center">No records found</TableCell>
+                            </TableRow>}
                     </TableBody>
                 </Table>
             </TableContainer>

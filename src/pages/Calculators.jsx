@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { Box, Link, Typography } from '@material-ui/core';
-import { EnhancedTable } from '../components';
-import { Icon, InlineIcon } from '@iconify/react';
-import calculatorIcon from '@iconify/icons-mdi/calculator';
+import { EnhancedTable, SearchBox } from '../components';
 import logo from '../logo.svg';
 
 export default class Calculators extends Component {
@@ -41,19 +39,45 @@ export default class Calculators extends Component {
                 action: <Link className="action-link" href={"#"} target="_blank">View</Link>,
                 ordering: 1
             },
-        ]
+        ],
+
+        searchTerm: '',
+        filteredResults: []
     }
+
+    handleSearchInput = (value) => {
+        console.log("Change callback", value);
+        this.setState({ searchTerm: value }, () => {
+            this.filterBy('search');
+        });
+    }
+
+    filterBy(action) {
+        switch (action) {
+            case 'search':
+                this.setState({ filteredResults: this.state.rows?.filter(row => row.name?.toLowerCase()?.includes(this.state.searchTerm?.toLowerCase())) });
+                break;
+
+            default:
+                console.log("Invalid Action!");
+        }
+    }
+
+
 
     render() {
         return (
             <div>
+
                 <img src={logo} width="84" height="84" />
-                <Box id="header-section" mb={2}>
+                <Box id="header-section" my={2}>
                     <Typography variant="h4">Calculator Hub</Typography>
                     <Typography variant="body1">List the calculators name with the links below</Typography>
                 </Box>
-
-                <EnhancedTable rows={this.state.rows} columns={this.state.columns} />
+                <Box id="search-section" my={2}>
+                    <SearchBox value={this.state.searchTerm} change={this.handleSearchInput} />
+                </Box>
+                <EnhancedTable rows={(this.state.searchTerm ? this.state.filteredResults : this.state.rows) || []} columns={this.state.columns} />
             </div>
         )
     }
