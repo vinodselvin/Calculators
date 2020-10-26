@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Box, Button, Link, Typography } from '@material-ui/core';
 import { EnhancedTable, SearchBox } from '../components';
 import logo from '../logo.svg';
-import { FullScreenDialog } from "../components";
+import { FullScreenDialog } from "../components"; 
+import { CalculatorList } from "../constants"
 
 export default class Calculators extends Component {
     state = {
@@ -39,18 +40,7 @@ export default class Calculators extends Component {
             }
         ],
 
-        rows: [
-            // TODO: To add a new calculator, duplicate the following object to create a new one and update the value ;)
-            // NOTE: Before adding new calculator make sure that doesn't exist already in the list. :P
-            {
-                name: 'Dummy Calculator (for Reference)',
-                link: "https://www.google.com"
-            },
-            {
-                name: 'BMI Calculator',
-                link: "https://www.calculator.net/bmi-calculator.html"
-            }
-        ],
+        rows: CalculatorList,
 
         searchTerm: '',
         filteredResults: []
